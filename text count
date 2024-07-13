@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>文字数測定ツール</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+        }
+        .result {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>文字数測定ツール</h1>
+    <textarea id="textInput" oninput="analyzeText()"></textarea>
+    <div class="result">
+        <p>総文字数: <span id="totalCount">0</span></p>
+        <p>句読点の数: <span id="punctuationCount">0</span></p>
+        <p>スペースの数: <span id="spaceCount">0</span></p>
+        <p>記号の数: <span id="symbolCount">0</span></p>
+    </div>
+    <script>
+        function analyzeText() {
+            const text = document.getElementById('textInput').value;
+            const totalCount = text.length;
+            const punctuationCount = (text.match(/[。、,.]/g) || []).length;
+            const spaceCount = (text.match(/\s/g) || []).length;
+            const symbolCount = (text.match(/[!-/:-@[-`{-~]/g) || []).length;
+
+            document.getElementById('totalCount').textContent = totalCount;
+            document.getElementById('punctuationCount').textContent = punctuationCount;
+            document.getElementById('spaceCount').textContent = spaceCount;
+            document.getElementById('symbolCount').textContent = symbolCount;
+        }
+    </script>
+</body>
+</html>
